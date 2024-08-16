@@ -1,0 +1,31 @@
+// compile-time programming
+
+// in some_module.umi
+
+// immediate module import
+// enables one to change what modules this source file imports and exports
+import! env;
+
+if (env.os == "windows") {
+    import windows;
+} else {
+    import unistd;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

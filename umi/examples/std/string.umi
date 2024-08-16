@@ -1,0 +1,10 @@
+import * from std;
+
+struct std::string {
+    len: size_t;
+    str: [char];
+};
+
+fun std::from(char: const *char, n: const int) -> unique *string {
+    return acquire<*string>();
+}

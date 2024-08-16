@@ -1,0 +1,7 @@
+module std;
+
+export const std::EXIT_SUCCESS: int = 0;
+
+fun println(fmt: char const * ) -> void {}
+
+export println as print;

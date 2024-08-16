@@ -1,0 +1,14 @@
+// end-of-line comment
+
+/* potentially
+a multiline
+* pretty
+* comment
+*/
+
+// \brief an EOL comment with a doc command
+/*
+ * \brief the same thing as above but now
+ * with a proper multiline comment
+ * \param and showing off more (un-thought of) commands
+ */

@@ -1,0 +1,40 @@
+// operator overloading
+struct dict<K, V> {
+    sz:         int;
+    keys:       *K;
+    values:     *V;
+    present:    *bool;
+}
+
+fun sizeof<T>() -> uint;
+
+fun sizeof<i32>() = 4;
+
+const pi<T> = 3.14234123515134.as<T>;
+
+fun operator[]<K, V>(&mp: const dict<K, V>, key: K) -> V {
+    const h = hash(key);
+    return mp.values[mp.keys[h]];
+}
+
+fun operator[]<K = string, V>(&mp: dict<K, V>, key: K, new_v: V) -> void {
+    const h = hash(key);
+    //...
+}
+
+fun test() {
+    mp = dict<V = int>{};
+    mp["hi"] = 3;
+}
+
+// vvv operator has a space in the name
+// use `` as a way to have identifiers with spaces!
+fun `operator acquire`();
+
+fun operator@(t1, t2); // generic binary operator
+
+fun operator$(); // generic unary operator
+
+// maybe later ...?
+fun `operator until`(a: int, b: int); // create a named binary operator
+// 1 until 3

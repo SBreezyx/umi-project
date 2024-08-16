@@ -1,0 +1,146 @@
+module foo;
+
+// everyone's favourite function
+fun main(argc: int, argv: **char) -> int {
+    for (i: int = 0; i < argc; ++i) {
+        println(argv[i]);
+}
+
+    return 0;
+}
+
+// overloading -- two mains, seperated by their arguments
+fun main() -> void {
+
+    a: int[5];
+
+
+
+}
+
+// must export 1 and only 1 symbol called main to for program entry.
+export as<() -> void>(main);
+// or export main::(int, [*char]) -> int;
+
+
+// just syntactic sugar for an equivalent function
+lambda: (int) -> int = [copy, &ref, =, &](i: int) /* -> optional */ -> int {
+    // stuff ...
+};
+
+struct data {
+    some_data: *int;
+}
+
+// anonymous structs and unions
+fun f(u: union {f32; i32;}) -> struct {x: u8; y: u8;};
+
+using useless_alias = struct {x: int};
+
+// UNIVERSAL CALL SYNTAX
+fun a_function(&foo: data) -> void;
+
+// d is a reference.. not the data!
+// references apply to names, not to types.
+fun some_data(&d: data) -> &int {
+    // access a struct member by ordinal or by name
+    return *d.0;
+}
+
+fun open(path: char8 const *) -> int unique {
+    return acquire 5;
+}
+
+fun close(&fd: int unique) -> void {
+    // actually close it
+
+    release fd;
+}
+
+fun exc() throws float -> int {
+    if (rand()) {
+        throw 42f;
+    } else {
+        return 0;
+    }
+}
+
+#if {
+
+}
+
+macro printf(...) {
+
+}
+
+fun sizeof(i: int) {
+    return f;
+}
+
+fun int.sizeof() {
+    return 4;
+}
+
+fun int.sec() -> int {
+    // convert to seconds;
+}
+
+fun v() {
+    sizeof(int)
+
+    int.
+
+    d = data{};
+    a_function(d);
+
+    // this is just syntactic sugar for the above.
+    d.a_function();
+
+    const fd = open("/tmp/foo");
+
+    const fd2 = fd;
+
+    try exc();
+
+    release fd2;
+
+    close(fd2);
+
+    switch() {
+    case blah -> continue;
+    case blahblah:
+    }
+
+
+    // "method-like"... "method-lite"
+    var &ref_from_ptr = d.some_data();
+    var &ref2 = some_data(d);
+} finally {
+
+}
+
+// default args!!
+fun foo(a: int = 3, &c: const [[int; 3]; 2;] = [
+    // spread operator again -- create an "int" range of
+    [1 ... 4], [4 ... 7]
+]);
+
+// function wrappers!! the result of the call is foo with...
+// named arguments!!
+fun foo(&c: const [[int; 2]; 3]) = foo(a = c.size);
+
+struct Foo {
+    a: int;
+    f: float;
+}
+
+fun bindings() {
+    // structured binding
+    // a is a move, f is a reference
+    const foo = Foo{};
+    const [a, &f] = foo;
+
+    let arr = [1, 2, 3, 4, 5];
+    // can destructure an array too ... with a slice?
+    let [x, y, z] = arr[1 : 4];
+}

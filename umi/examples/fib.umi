@@ -1,0 +1,10 @@
+export module fib;
+
+// compute the n'th fibonacci number
+export fun fib(n: int) {
+    if (n < 3) {
+        return 1;
+    } else {
+        return fib(n - 1) + fib(n - 2);
+    }
+}

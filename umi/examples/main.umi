@@ -1,0 +1,45 @@
+import EXIT_SUCCESS, EXIT_FAILURE from std;
+import fib;
+
+// default package:
+// does not allow function overloading
+// does not mangle names.
+// is used for FFI.
+
+
+export fun main() -> int {
+    const num = fib::fib(8);
+
+    return num > 0 ? EXIT_SUCCESS : EXIT_FAILURE;
+}
+
+
+// a module has an Abstract syntax tree
+// but not everything in the abstract syntax tree
+// lends itself for IR generation.
+// there are abstract syntax tree node types that relate to IR codegen types.
+// what are they?
+
+// import -> declare types into LLVMContext
+// import -> declare global variables into llvm::Module
+// import -> declare global (extern) functions into llvm::Module
+
+// every identifier can only be ONE kind of entity?
+// what is the goal of parsing?
+// the goal of parsing is to draw the boxes around definitions and usages.
+// also, it is to memoize (through hashing) strings and constants
+// and also to throw away features only used for syntax i.e. keywords, braces, etc.
+// during semantic analysis, we find out if usages and definitions align.
+// therefore, it is extremely important that in every usage, we can unambiguously set an _expectation_ on the symbol.
+
+// lex -> parse -> sort dep graph -> compile-time code exec / semantic analysis -> code gen
+
+
+export module foo;
+export fun foo() -> void {}
+export enum foo {}
+export struct foo {}
+export union foo {}
+export typedef foo = int;
+export foo as bar;
+export *;

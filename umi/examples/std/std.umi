@@ -1,0 +1,8 @@
+// code intended to link with C must be in the global module
+// if a function has no overloads, its symbol is simply its name
+// (this matches the behaviour of C)
+// if a function has at least one overload, then its name must be mangled.
+
+export module std;
+
+export const EXIT_SUCCESS: int = 0;

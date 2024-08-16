@@ -1,0 +1,31 @@
+// generics
+
+concept signed<T> = T == int || T == i8 || T == i16;
+
+concept is_integral<T> = signed<T> || requires {
+    sizeof<T> == 4;
+    T + T -> T;
+};
+
+concept any<T> = true;
+
+struct s<Typevar: is_integral, U: any> {}
+
+fun memcpy<T>(dst: *T, src: const *T, n: int) { /* ... */ }
+
+
+// Args here is a type/value array (conceptually, [type; N])
+// therefore, you can use array operations on it
+fun new<T, ...Args>(&args: Args) {
+    // in below example, 3
+    // Args.size
+
+    Args[0] == int
+    Args[2] == float
+
+    Args[4] == 2
+
+    // spread args into comma-separated list
+    return T{..Args};
+}
+// usage = foo = new<Foo>(1, 'c', 3.14)

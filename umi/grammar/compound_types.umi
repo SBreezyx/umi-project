@@ -1,0 +1,73 @@
+struct my_product {
+    a_member: int; // integral type of "natural" size
+    another_member: f32; // 32-bit floating point
+    u64; // anonymous member of 64-bit unsigned length
+}
+
+union my_sum {
+    an_alternative: float; // floating point of "natural" size
+    *char; // an anonymous alternative of pointer-to-char.
+}
+
+struct s {
+    tag: int;
+    union { // a and c are injected into struct s.
+        a: int;
+        c: u8;
+    }; // semi-colon is to separate members
+
+    s: struct { h: int; }
+}
+
+
+union u {
+    // u is either "a" or "c"
+    struct {
+        a: [[int; 5]; 6];
+    };
+    c: char;
+}
+
+struct not_inheritance {
+    // spread operator
+    // inject all the members of s into this struct
+    ...s;
+}
+
+// flexible array member
+// sizeof(flex) == sizeof(int)?
+struct flex {
+    n: int;
+    payload: [f64];
+}
+
+struct p {
+    // ERROR: references are not a type modifier
+    ref: &int;
+
+    // ERROR: reference members are not allowed in structs/unions
+    &ref: int;
+
+    // OK: ptr is a type/value
+    ref: *int;
+
+    // a struct/union with a unique member is itself unique
+    resource: unique int;
+
+    // a struct/union with a const member is itself const?
+    not_copyable: const int;
+
+    // bottom const is different from top const
+    not_const: * const int;
+}
+
+// access by name... using either . or ::
+struct {a: int;}{0}.a;
+struct {a: int;}{0}::a;
+
+// access by position using either . or ::
+struct {a: int;}{0}.0;
+
+// designated initialisers
+struct {a: int;}{.a = 0};
+struct {a: int; b: float}{.1 = 42.0, .0 = .1 as int};

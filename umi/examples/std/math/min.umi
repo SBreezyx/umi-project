@@ -1,0 +1,5 @@
+import std;
+
+fun std::min(l: int, r: int) -> int {
+    return l < r ? l : r;
+}

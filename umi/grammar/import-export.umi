@@ -1,0 +1,27 @@
+// module interface unit definition.
+export module external;
+
+// declare you are an implementation unit of internal
+module internal;
+
+// export internal after-the-fact
+export internal;
+
+// import the module foo and all entities from all modules
+import bar;
+
+// import bar and immediately export all its names
+export import bar;
+
+import a as alias, b, c from another::module;
+import a::module::with::very::long::name as short_name;
+import sqrt from ::math;
+
+// import specific things from the global (default?) module
+import var, Type from;
+import var, Type from ::;
+import var, Type from ``;
+import as global;
+import :: as global;
+import `` as global;
+

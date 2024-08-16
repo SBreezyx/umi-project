@@ -1,0 +1,45 @@
+// resource safety
+
+// `unique` is a type qualifier that signifies
+// that the thing it is attached to is a resource.
+fun malloc<T>() -> unique *T {
+    memory = // ...;
+    return acquire<*T>(memory);
+}
+
+fun free<T>(ptr: unique *T) {
+    // this resource's lifetime has now ended.
+    release ptr;
+} // no error at end of function, lifetime has ended.
+
+fun free(sockets: [unique int], n: int) {
+    // actually close the sockets...
+
+    for (ix = 0; i < n; ++i) {
+        // the lifetime of the socket has now ended
+        release sockets[i];
+    } // possible that a lifetime has not ended here
+
+    // assuming the programmer hasn't made a mistake,
+    // this now "provably" ends the lifetime of the sockets
+    release sockets;
+}
+
+fun main() {
+    // ERROR: malloc returns a unique *int
+    heap_ptr: *int = malloc<int>();
+
+    // OK: heap_ptr now "owns" this resource
+    heap_ptr: unique *int = malloc<int>();
+
+    {
+        // implicit move semantics -- heap_ptr can NOT be used again
+        // after this point
+        another_ptr = heap_ptr;
+
+        // free() takes another_ptr by value, so it now owns the memory
+        free(another_ptr);
+    }
+    // ERROR: another_ptr's lifetime ended while owning a resource.
+    // they need to destroy it
+} // heap_ptr's lifetime also ended, so no error here.

@@ -1,0 +1,17 @@
+// enums
+
+struct rgb {
+    r: int = 0;
+    g: int = 0;
+    b: int = 0;
+}
+
+enum color<base_type: rgb> {
+    RED = base_type{.r = 255},
+
+    BLUE = {.b = 255},
+}
+
+enum error /* <int> (the default) */ {
+    E_NOMEM = 3,
+}

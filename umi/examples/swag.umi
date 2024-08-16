@@ -1,0 +1,16 @@
+import std;
+import! build;
+
+import if!(build::os != 1) {
+    linux;
+} else {
+    macos;
+};
+
+// import build::os != ?! linux : macos;
+
+export fun greeting() {
+    const str = "hello, world"; // str is a [char; 13]
+
+    return std::from(&str[0], 13);
+}

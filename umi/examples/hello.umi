@@ -1,0 +1,14 @@
+import EXIT_SUCCESS, println from std;
+import * from default;
+
+fun main() -> int {
+    const greeting = greeting();
+
+    const two = sqrt(4.0);
+
+    println("hello, world!");
+
+    return EXIT_SUCCESS;
+}
+
+export main;

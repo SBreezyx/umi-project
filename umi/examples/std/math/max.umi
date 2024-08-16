@@ -1,0 +1,5 @@
+import std;
+
+fun std::max(l: int, r: int) -> int {
+    return r < l ? r : l;
+}

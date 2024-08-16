@@ -1,0 +1,23 @@
+// static exceptions
+// can return ONE type, so we can only throw ONE type
+fun throwable(i: int) throws int -> void {
+    if (i == 15) {
+        throw 42;
+    } else if (i == 6771) {
+        throw 78;
+    }
+}
+
+fun no_handle() throws int -> void {
+    // error -- any function that tries to call a throwable
+    // must itself also be throwable
+    try throwable(15);
+}
+
+fun handle() {
+    try {
+        throwable(6771);
+    } catch(e: int) {
+        // same cost as an if but with better control flow guarantees
+    }
+}

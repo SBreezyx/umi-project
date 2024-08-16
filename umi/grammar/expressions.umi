@@ -1,0 +1,38 @@
+// order of evaluation, if unspecified, can lead to optimization opportunities not otherwise possible.
+// as much as I hate to say it, having unspecified order of evaluation is probably the right decision for umi.
+
+fun foo() {
+    // statements can also be expressions
+
+    const v = {
+        let f = 2;
+
+        f ** 2;
+    }
+
+    const not_uninitialized = if (true) {
+        2;
+    } else {
+        4;
+    }
+    // syntactic sweet, sweet sugar
+    const n2 = true ? 2 : 4;
+
+    const `dont blow up` = try {
+        throw 4;
+    } catch(int) {
+        // do nothing
+    }
+
+    // when! should have the same semantics as a C-style switch(...)
+    // otherwise, just a nicer way to have alot of nested ifs.
+    const kotlin = switch! (const temp = some_fun()) {
+        3 || 4 || 5  -> {
+
+        }
+
+        default -> {
+
+        }
+    };
+}

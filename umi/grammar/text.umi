@@ -1,0 +1,3 @@
+a char is a UTF-8 code unit
+
+a string is still char[] logically
